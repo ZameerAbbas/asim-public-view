@@ -3,7 +3,7 @@ import { Createcart } from "../../Context/Context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import {BiArrowBack} from "react-icons/bi"
+import { BiArrowBack } from "react-icons/bi";
 
 const Cart = () => {
   const {
@@ -35,6 +35,9 @@ const Cart = () => {
     clearCartTrending,
     getCartTotalTrending,
   } = useContext(Createcart);
+
+  // const Totalprices = getCartTotal.data.gemPrice;
+
 
   const notifyRemovedFromCart = (item) =>
     toast.error(`${item.title} removed from cart!`, {
@@ -84,21 +87,24 @@ const Cart = () => {
     notifyRemovedFromCart(product);
   };
 
-  console.log(trendingCartItems)
   return (
     <>
       <div>
-      <Link to="/"  style={{textDecoration:"none",color:"black",fontWeight:"700"}} ><BiArrowBack /> <span>Home</span></Link>
+        <Link
+          to="/"
+          style={{ textDecoration: "none", color: "black", fontWeight: "700" }}
+        >
+          <BiArrowBack /> <span>Home</span>
+        </Link>
         <h2>Gems Cart</h2>
-        
         <div>
           {cartItems.map((item) => (
             <div key={item.id}>
               <div>
-                <img style={{width:"550px"}} src={item.data.gemImageURL} alt={item.title} />
+               
                 <div>
-                  <h1>{item.data.gemName}</h1>
-                  <p>${item.data.gemPrice}</p>
+                  <h1>{item.category}</h1>
+                 
                 </div>
               </div>
               <div>
@@ -109,7 +115,7 @@ const Cart = () => {
                 >
                   +
                 </button>
-                <p>{item.quantity}</p>
+              
                 <button
                   onClick={() => {
                     const cartItem = cartItems.find(
@@ -130,7 +136,9 @@ const Cart = () => {
         </div>
         {cartItems.length > 0 ? (
           <div>
-            <h1>Total: ${getCartTotal()}</h1>
+            <b>Total of Gems : $
+            {getCartTotal()}
+            </b>
             <button
               onClick={() => {
                 clearCart();
@@ -145,11 +153,12 @@ const Cart = () => {
         )}
       </div>
 
+
       <div>
         <h2>Mineral Cart</h2>
         <div>
           {mineralsCartItems.map((item) => (
-            <div key={item.id}>
+            <div key={item.key}>
               <div>
                 <img
                   style={{ width: "50px" }}
@@ -173,7 +182,7 @@ const Cart = () => {
                 <button
                   onClick={() => {
                     const cartItem = mineralsCartItems.find(
-                      (product) => product.id === item.id
+                      (product) => product.key === item.key
                     );
                     if (cartItem.quantity === 1) {
                       handleRemoveFromCartminearl(item);
@@ -209,7 +218,7 @@ const Cart = () => {
         <h2>Special Offer Cart</h2>
         <div>
           {offerCartItems.map((items) => (
-            <div key={items.id}>
+            <div key={items.key}>
               <div>
                 <img
                   style={{ width: "50px" }}
@@ -233,7 +242,7 @@ const Cart = () => {
                 <button
                   onClick={() => {
                     const cartItem = offerCartItems.find(
-                      (product) => product.id === items.id
+                      (product) => product.key === items.key
                     );
                     if (cartItem.quantity === 1) {
                       handleRemoveFromCartoffer(items);

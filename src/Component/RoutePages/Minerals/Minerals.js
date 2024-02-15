@@ -53,12 +53,12 @@ const Minerals = () => {
                   <h1>Mineral Name : {val.data.mineralName}</h1>
 
                   <div>
-                    <h1>{val.data.gemName}</h1>
-                    <p>{val.data.gemDescription}...</p>
-                    <p>${val.data.gemPrice}</p>
+                    <h1>{val.data.mineralName}</h1>
+                    <p>{val.data.mineralDescription}...</p>
+                    <p>${val.data.mineralPrice}</p>
                   </div>
                   <div>
-                    {!mineralsCartItems.find((item) => item.id === val.id) ? (
+                    {!mineralsCartItems.find((item) => item.key === val.key) ? (
                       <button
                         onClick={() => {
                           addToMineralsCart(val);
@@ -77,14 +77,14 @@ const Minerals = () => {
                         </button>
                         <p>
                           {
-                            mineralsCartItems.find((item) => item.id === val.id)
+                            mineralsCartItems.find((item) => item.key === val.key)
                               .quantity
                           }
                         </p>
                         <button
                           onClick={() => {
                             const cartItem = mineralsCartItems.find(
-                              (item) => item.id === val.id
+                              (item) => item.key === val.key
                             );
                             if (cartItem.quantity === 1) {
                               // handleRemoveFromCart(val);

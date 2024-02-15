@@ -35,7 +35,7 @@ const Uncategrical = () => {
     removeTrendingFromCart,
   } = useContext(Createcart);
 
-  const [elapsedTime, setElapsedTime] = useState(5 * 24 * 60 * 60); // 5 days in seconds
+  const [elapsedTime, setElapsedTime] = useState(24 * 60 * 60); // 5 days in seconds
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -75,8 +75,7 @@ const Uncategrical = () => {
         trend.push({ key: key, data: value });
       });
       setFav(trend);
-      console.log("dsafad")
-
+      console.log("dsafad");
     });
   }, []);
 
@@ -92,7 +91,7 @@ const Uncategrical = () => {
           </Header>
           <SpecialCardConatiner>
             {specialOffer.map((items) => (
-              <SpecialCard key={items.id}>
+              <SpecialCard key={items.key}>
                 <div>
                   <div style={{ textAlign: "center" }}>
                     <h3>{items.data.offerName}</h3>
@@ -114,7 +113,7 @@ const Uncategrical = () => {
                     addToCardOffer(items);
                   }}
                 >
-                  Add to cart
+                  {addToCardOffer ? "Add to cart" : "Added to cart"}
                 </button>
               </SpecialCard>
             ))}
@@ -148,7 +147,7 @@ const Uncategrical = () => {
                 <Remaning>
                   <div>
                     <h3>{items.data.trendingName}</h3>
-                    <p>{items.data.trendingPrice} $</p>
+                    <p>{items.data.trendingPrice}$</p>
                   </div>
 
                   <button

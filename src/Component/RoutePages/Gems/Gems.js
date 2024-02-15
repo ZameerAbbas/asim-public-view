@@ -63,7 +63,7 @@ const Gems = () => {
                     <p>${product.data.gemPrice}</p>
                   </div>
                   <div>
-                    {!cartItems.find((item) => item.id === product.id) ? (
+                    {!cartItems.find((item) => item.key === product.key) ? (
                       <div>
                         <button
                           onClick={() => {
@@ -87,14 +87,14 @@ const Gems = () => {
                         </button>
                         <p>
                           {
-                            cartItems.find((item) => item.id === product.id)
+                            cartItems.find((item) => item.key === product.key)
                               .quantity
                           }
                         </p>
                         <button
                           onClick={() => {
                             const cartItem = cartItems.find(
-                              (item) => item.id === product.id
+                              (item) => item.key === product.key
                             );
                             if (cartItem.quantity === 1) {
                               handleRemoveFromCart(product);

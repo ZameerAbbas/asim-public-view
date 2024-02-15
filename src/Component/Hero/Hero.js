@@ -16,18 +16,18 @@ const Hero = () => {
       <Content>
         <Card>
           <h1>
-            Discover the Beauty of Nature : Premium{" "}
+            Discover the Beauty of Nature, Premium{" "}
             <span class="underlined underline-clip">Minerals</span> and{" "}
             <span class="underlined underline-mask"> Gems</span> for Sale
           </h1>
           <br />
 
-          <DivSearch>
+          {/* <DivSearch>
             <Searchbox>
               <Inputsear type="search" placeholder="What are you lookng For?"/> <BsSearch fontWeight={900} />
             </Searchbox>
              <SearchBtn> Search</SearchBtn>
-          </DivSearch>
+          </DivSearch> */}
         </Card>
       </Content>
     

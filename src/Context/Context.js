@@ -104,6 +104,7 @@ const Statestore = ({ children }) => {
         trending.push({ key: keyname, data: data });
       });
       setTrending(trending);
+      console.log(trending)
     
     });
   }, []);
@@ -214,14 +215,14 @@ const Statestore = ({ children }) => {
 
   // gems remove from cart
   const removeFromCart = (item) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
+    const isItemInCart = cartItems.find((cartItem) => cartItem.key === item.key);
 
     if (isItemInCart.quantity === 1) {
-      setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
+      setCartItems(cartItems.filter((cartItem) => cartItem.key !== item.key));
     } else {
       setCartItems(
         cartItems.map((cartItem) =>
-          cartItem.id === item.id
+          cartItem.key === item.key
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         )
@@ -232,17 +233,17 @@ const Statestore = ({ children }) => {
   // minerals remove from cart
   const removemineralFromCart = (item) => {
     const isItemInCart = mineralsCartItems.find(
-      (cartItem) => cartItem.id === item.id
+      (cartItem) => cartItem.key === item.key
     );
 
     if (isItemInCart.quantity === 1) {
       setMineralsCartItems(
-        mineralsCartItems.filter((cartItem) => cartItem.id !== item.id)
+        mineralsCartItems.filter((cartItem) => cartItem.key !== item.key)
       );
     } else {
       setMineralsCartItems(
         mineralsCartItems.map((cartItem) =>
-          cartItem.id === item.id
+          cartItem.key === item.key
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         )
@@ -253,17 +254,17 @@ const Statestore = ({ children }) => {
   //  Specail offer remove from cart
   const removeofferFromCart = (item) => {
     const isItemInCart = offerCartItems.find(
-      (cartItem) => cartItem.id === item.id
+      (cartItem) => cartItem.key === item.key
     );
 
     if (isItemInCart.quantity === 1) {
       setOfferCartItems(
-        offerCartItems.filter((cartItem) => cartItem.id !== item.id)
+        offerCartItems.filter((cartItem) => cartItem.key !== item.key)
       );
     } else {
       setOfferCartItems(
         offerCartItems.map((cartItem) =>
-          cartItem.id === item.id
+          cartItem.key === item.key
             ? { ...cartItem, quantity: cartItem.quantity - 1
               
             }
@@ -277,17 +278,17 @@ const Statestore = ({ children }) => {
 
   const removeTrendingFromCart = (item) => {
     const isItemInCart = trendingCartItems.find(
-      (cartItem) => cartItem.id === item.id
+      (cartItem) => cartItem.key === item.key
     );
 
     if (isItemInCart.quantity === 1) {
       setTrendingCartItems(
-        trendingCartItems.filter((cartItem) => cartItem.id !== item.id)
+        trendingCartItems.filter((cartItem) => cartItem.key !== item.key)
       );
     } else {
       setTrendingCartItems(
         trendingCartItems.map((cartItem) =>
-          cartItem.id === item.id
+          cartItem.key === item.key
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         )
@@ -345,12 +346,21 @@ const Statestore = ({ children }) => {
   };
 
   //Trending total in cart
+  // const getCartTotalTrending = () => {
+  //   return trendingCartItems.reduce(
+  //     (total, item) => total + item.data.TrendingPrice * item.quantity,
+  //     0
+  //   );
+  // };
   const getCartTotalTrending = () => {
     return trendingCartItems.reduce(
-      (total, item) => total + item.data.TrendingPrice * item.quantity,
+      (total, item) => total + item.data.trendingPrice * item.quantity,
       0
     );
   };
+  
+  console.log(trendingCartItems)
+  
 
   // This useEffect runs when the component mounts.
   // It retrieves cart data from localStorage and updates the cartItems state with the parsed data.
