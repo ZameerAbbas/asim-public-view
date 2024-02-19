@@ -27,11 +27,14 @@ const Uncategrical = () => {
     // special offer functions and node data
     specialOffer,
     addToCardOffer,
+    offerCartItems,
     removeofferFromCart,
 
     // Trending offer functions and nodes data
     trending,
     addToCardTrending,
+    trendingCartItems,
+
     removeTrendingFromCart,
   } = useContext(Createcart);
 
@@ -75,9 +78,14 @@ const Uncategrical = () => {
         trend.push({ key: key, data: value });
       });
       setFav(trend);
-      console.log("dsafad");
     });
   }, []);
+  const handleRemoveFromCart = (product) => {
+    removeTrendingFromCart(product);
+  };
+  const handleRemoveFromCartOffer = (product) => {
+    removeofferFromCart(product);
+  };
 
   return (
     <div style={{ padding: "15px 80px" }}>
@@ -108,13 +116,50 @@ const Uncategrical = () => {
                     alt={items.data.offerName}
                   />
                 </ImgDivofr>
-                <button
-                  onClick={() => {
-                    addToCardOffer(items);
-                  }}
-                >
-                  {addToCardOffer ? "Add to cart" : "Added to cart"}
-                </button>
+
+                <div>
+                  {!offerCartItems.find((item) => item.key === items.key) ? (
+                    <div>
+                      <button
+                        onClick={() => {
+                          addToCardOffer(items);
+                        }}
+                      >
+                        Add to cart
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <button
+                        onClick={() => {
+                          addToCardOffer(items);
+                        }}
+                      >
+                        +
+                      </button>
+                      <p>
+                        {
+                          offerCartItems.find((item) => item.key === items.key)
+                            .quantity
+                        }
+                      </p>
+                      <button
+                        onClick={() => {
+                          const cartItem = offerCartItems.find(
+                            (item) => item.key === items.key
+                          );
+                          if (cartItem.quantity === 1) {
+                            handleRemoveFromCartOffer(items);
+                          } else {
+                            removeofferFromCart(items);
+                          }
+                        }}
+                      >
+                        -
+                      </button>
+                    </div>
+                  )}
+                </div>
               </SpecialCard>
             ))}
 
@@ -149,14 +194,52 @@ const Uncategrical = () => {
                     <h3>{items.data.trendingName}</h3>
                     <p>{items.data.trendingPrice}$</p>
                   </div>
-
-                  <button
-                    onClick={() => {
-                      addToCardTrending(items);
-                    }}
-                  >
-                    Add to cart
-                  </button>
+                  <div>
+                    {!trendingCartItems.find(
+                      (item) => item.key === items.key
+                    ) ? (
+                      <div>
+                        <button
+                          onClick={() => {
+                            addToCardTrending(items);
+                          }}
+                        >
+                          Add to cart
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        <button
+                          onClick={() => {
+                            addToCardTrending(items);
+                          }}
+                        >
+                          +
+                        </button>
+                        <p>
+                          {
+                            trendingCartItems.find(
+                              (item) => item.key === items.key
+                            ).quantity
+                          }
+                        </p>
+                        <button
+                          onClick={() => {
+                            const cartItem = trendingCartItems.find(
+                              (item) => item.key === items.key
+                            );
+                            if (cartItem.quantity === 1) {
+                              handleRemoveFromCart(items);
+                            } else {
+                              removeTrendingFromCart(items);
+                            }
+                          }}
+                        >
+                          -
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </Remaning>
               </TrendingCard>
             ))}

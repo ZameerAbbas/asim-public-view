@@ -87,6 +87,7 @@ const Cart = () => {
     notifyRemovedFromCart(product);
   };
 
+
   return (
     <>
       <div>
@@ -278,7 +279,7 @@ const Cart = () => {
         <h2>Trending Items Cart</h2>
         <div>
           {trendingCartItems.map((item) => (
-            <div key={item.id}>
+            <div key={item.key}>
               <div>
                 <img
                   style={{ width: "50px" }}
@@ -302,7 +303,7 @@ const Cart = () => {
                 <button
                   onClick={() => {
                     const cartItem = trendingCartItems.find(
-                      (product) => product.id === item.id
+                      (product) => product.key === item.key
                     );
                     if (cartItem.quantity === 1) {
                       handleRemoveFromCarttrend(item);

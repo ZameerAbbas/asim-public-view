@@ -150,49 +150,31 @@ const Statestore = ({ children }) => {
 
   // Specail offer add to cart
   const addToCardOffer = (item) => {
-    const isItemInCart = specialOffer.find(
+    const isItemInCart = offerCartItems.find(
       (cartItem) => cartItem.key === item.key
     );
 
     if (isItemInCart) {
       setOfferCartItems(
-        specialOffer.map((cartItem) =>
+        offerCartItems.map((cartItem) =>
           cartItem.key === item.key
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         )
       );
     } else {
-      setOfferCartItems([...specialOffer, { ...item, quantity: 1 }]);
+      setOfferCartItems([...offerCartItems, { ...item, quantity: 1 }]);
     }
 
-    localStorage.setItem("specialOffer", JSON.stringify(specialOffer));
+    localStorage.setItem("offerCartItems", JSON.stringify(offerCartItems));
   };
 
   // Trending Product add to cart
-  // const addToCardTrending = (item) => {
-  //   const isItemInCart = trendingCartItems.find(
-  //     (cartItem) => cartItem.id === item.id
-  //   );
-
-  //   if (isItemInCart) {
-  //     setTrendingCartItems(
-  //       trendingCartItems.map((cartItem) =>
-  //         cartItem.id === item.id
-  //           ? { ...cartItem, quantity: cartItem.quantity + 1 }
-  //           : cartItem
-  //       )
-  //     );
-  //   } else {
-  //     setTrendingCartItems([...trendingCartItems, { ...item, quantity: 1 }]);
-  //   }
-  // };
-
   const addToCardTrending = (item) => {
     const isItemInCart = trendingCartItems.find(
       (cartItem) => cartItem.key === item.key
     );
-  
+
     if (isItemInCart) {
       setTrendingCartItems(
         trendingCartItems.map((cartItem) =>
@@ -204,10 +186,28 @@ const Statestore = ({ children }) => {
     } else {
       setTrendingCartItems([...trendingCartItems, { ...item, quantity: 1 }]);
     }
-  
-    // Update the localStorage item with the updated cart items
     localStorage.setItem("trendingCartItems", JSON.stringify(trendingCartItems));
   };
+  // const addToCardTrending = (item) => {
+  //   const isItemInCart = trendingCartItems.find(
+  //     (cartItem) => cartItem.key === item.key
+  //   );
+  
+  //   if (isItemInCart) {
+  //     setTrendingCartItems(
+  //       trendingCartItems.map((cartItem) =>
+  //         cartItem.key === item.key
+  //           ? { ...cartItem, quantity: cartItem.quantity + 1 }
+  //           : cartItem
+  //       )
+  //     );
+  //   } else {
+  //     setTrendingCartItems([...trendingCartItems, { ...item, quantity: 1 }]);
+  //   }
+  
+  //   // Update the localStorage item with the updated cart items
+  //   localStorage.setItem("trendingCartItems", JSON.stringify(trendingCartItems));
+  // };
   
   
   // handles removing items from the cart. It checks if the item's quantity is 1;
@@ -344,6 +344,7 @@ const Statestore = ({ children }) => {
       0
     );
   };
+  console.log(getCartTotaloffer())
 
   //Trending total in cart
   // const getCartTotalTrending = () => {
@@ -359,7 +360,7 @@ const Statestore = ({ children }) => {
     );
   };
   
-  console.log(trendingCartItems)
+
   
 
   // This useEffect runs when the component mounts.
