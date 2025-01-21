@@ -11,7 +11,6 @@ import {
   Items,
   ItemDetail,
 } from "./GemElements";
-import GemNav from "./GemNav";
 
 import { Createcart } from "../../../Context/Context";
 const Gems = () => {
@@ -33,7 +32,7 @@ const Gems = () => {
   return (
     <Contianer>
       <Whatapp />
-      <GemNav />
+    
       <GemsWrapper>
         <GemStore>
           <div style={{ width: "70%" }}>
